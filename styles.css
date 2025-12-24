@@ -1,0 +1,232 @@
+/* 🎨 COLOR SYSTEM (MANDATORY) */
+:root {
+  /* Soft Blue Accents */
+  --color-accent: #6EA8FF;
+  --color-accent-hover: #7AB6FF;
+  
+  /* Backgrounds */
+  --bg-main: #0B1220;
+  --bg-card: #111827; 
+  --bg-card-hover: #1E293B;
+
+  /* Text */
+  --text-primary: #E5E7EB;
+  --text-secondary: #94A3B8;
+
+  /* Glows */
+  --glow-subtle: 0 0 20px rgba(110, 168, 255, 0.15);
+  --glow-hover: 0 0 30px rgba(110, 168, 255, 0.25);
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 🌌 BACKGROUND UNIQUENESS: Aurora Gradient */
+.background-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--bg-main);
+}
+
+.aurora-blob {
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: float 20s infinite ease-in-out;
+  border-radius: 50%;
+}
+
+.blob-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, #1e3a8a 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  bottom: -10%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, #172554 0%, transparent 70%);
+  animation-delay: -5s;
+}
+
+.blob-3 {
+  top: 40%;
+  left: 40%;
+  width: 30vw;
+  height: 30vw;
+  background: radial-gradient(circle, rgba(110, 168, 255, 0.1) 0%, transparent 70%);
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+/* 🧱 LAYOUT */
+.container-hub {
+  width: 100%;
+  max-width: 480px;
+  padding: 80px 24px 40px; /* Top padding for breathing room */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  opacity: 0; /* For fade-in animation */
+  animation: fadeInContainer 1s ease-out forwards;
+}
+
+@keyframes fadeInContainer {
+  to { opacity: 1; }
+}
+
+/* 👤 PROFILE SECTION */
+.profile-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar-container {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 8px;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(110, 168, 255, 0.3);
+  box-shadow: var(--glow-subtle);
+}
+
+.status-dot {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--color-accent);
+  border: 2px solid var(--bg-main);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(110, 168, 255, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(110, 168, 255, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(110, 168, 255, 0); }
+}
+
+/* 🔗 LINK CARDS */
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.glass-card {
+  position: relative;
+  background: rgba(17, 24, 39, 0.7); /* Hex #111827 with opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  
+  /* Initial state for stagger animation */
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Hover effects */
+@media (hover: hover) {
+  .glass-card:hover {
+    background: rgba(30, 41, 59, 0.8); /* Lighter card on hover */
+    transform: translateY(-2px) scale(1.02);
+    border-color: rgba(110, 168, 255, 0.3);
+    box-shadow: var(--glow-hover);
+  }
+}
+
+/* Active/Tap effect for mobile */
+.glass-card:active {
+  transform: scale(0.98);
+}
+
+.card-icon {
+  font-size: 24px;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-title {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.card-desc {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+/* Stagger Animation Class (added by JS) */
+.animate-in {
+  animation: slideUpFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 2rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
